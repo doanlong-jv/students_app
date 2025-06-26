@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>学生管理システム</title>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+    <header>
+        <h1>🎓 学生管理システム</h1>
+        <nav>
+            <button onclick="navigateTo('list')">学生一覧</button>
+            <button onclick="navigateTo('stats')">統計</button>
+        </nav>
+    </header>
+
+    <!-- 学生一覧ページ -->
+    <section id="page-list" class="page">
+        <div class="controls">
+            <input
+                type="text"
+                id="searchBox"
+                placeholder="検索（氏名、学籍番号、メール）"
+                oninput="app.applyFilters()"
+            />
+            <select id="filterMajor" onchange="app.applyFilters()">
+                <option value="">専攻で絞り込み</option>
+                <option value="コンピュータサイエンス">コンピュータサイエンス</option>
+                <option value="ソフトウェア工学">ソフトウェア工学</option>
+                <option value="情報システム">情報システム</option>
+                <option value="情報セキュリティ">情報セキュリティ</option>
+            </select>
+            <button onclick="showForm()">学生を追加</button>
+        </div>
+        <div id="tableContainer">
+            <!-- 学生リストの表がここにレンダリングされます -->
+        </div>
+    </section>
+
+    <!-- 統計ページ -->
+    <section id="page-stats" class="page" style="display:none;">
+        <h2>統計情報</h2>
+        <div id="statsContainer"></div>
+    </section>
+
+    <!-- 学生情報入力モーダル -->
+    <div id="formModal" class="modal" style="display:none;">
+        <div class="modal-content">
+            <span class="close" onclick="closeForm()">&times;</span>
+            <h2>学生情報入力</h2>
+            <form id="studentForm">
+                <input type="hidden" id="studentIdHidden" />
+                <div class="form-group">
+                    <label for="studentId">学籍番号</label>
+                    <input type="text" id="studentId" required />
+                </div>
+                <div class="form-group">
+                    <label for="fullName">氏名</label>
+                    <input type="text" id="fullName" required />
+                </div>
+                <div class="form-group">
+                    <label for="email">メールアドレス</label>
+                    <input type="email" id="email" required />
+                </div>
+                <div class="form-group">
+                    <label for="phone">電話番号</label>
+                    <input type="tel" id="phone" required />
+                </div>
+                <div class="form-group">
+                    <label for="major">専攻</label>
+                    <select id="major" required>
+                        <option value="">専攻を選択してください</option>
+                        <option value="コンピュータサイエンス">コンピュータサイエンス</option>
+                        <option value="ソフトウェア工学">ソフトウェア工学</option>
+                        <option value="情報システム">情報システム</option>
+                        <option value="情報セキュリティ">情報セキュリティ</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="year">学年</label>
+                    <select id="year" required>
+                        <option value="">学年を選択してください</option>
+                        <option value="1年">1年</option>
+                        <option value="2年">2年</option>
+                        <option value="3年">3年</option>
+                        <option value="4年">4年</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn">保存</button>
+                <button type="button" class="btn btn-cancel" onclick="closeForm()">キャンセル</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

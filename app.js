@@ -1,4 +1,4 @@
-// script.js
+
 let currentPage = 'list';
 let itemsPerPage = 5;
 let currentPageNumber = 1;
